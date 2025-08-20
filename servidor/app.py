@@ -32,8 +32,10 @@ def hello_world():
 def sensor():
     datos = request.json
     db = abrirConexion()
-    sensor=datos["nombre"]
-    valor=datos["valor"]
-    print(f"Sensor: ",sensor, "valor:" ,valor,)
+    Sensor=datos["nombre"]
+    Valor=datos["valor"]
+    print(f"Sensor: ",Sensor, "valor:" ,Valor,)
+    db.execute("INSERT INTO valores(nombre, valor) VALUES(?, ?)", (Sensor, Valor))
+    db.commit()
     cerrarConexion()
     return "OK"
