@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, g, request
+from flask import Flask, g, request, jsonify
 
 
 def dict_factory(cursor, row):
@@ -38,4 +38,5 @@ def sensor():
     db.execute("INSERT INTO valores(nombre, valor) VALUES(?, ?)", (Sensor, Valor))
     db.commit()
     cerrarConexion()
-    return "OK"
+    respuesta = {"respuesta" : "ok"}
+    return jsonify(respuesta)
