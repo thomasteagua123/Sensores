@@ -37,6 +37,13 @@ def sensor():
     print(f"Sensor: ",Sensor, "valor:" ,Valor,)
     db.execute("INSERT INTO valores(nombre, valor) VALUES(?, ?)", (Sensor, Valor))
     db.commit()
-    cerrarConexion()
     respuesta = {"respuesta" : "ok"}
+    cerrarConexion()
     return jsonify(respuesta)
+
+@app.route("/api/valores")
+def valores():
+    db=abrirConexion()
+    cursor=db.execute("SELECT * FROM valores")
+    datos=cursor.fetchall()
+    return jsonify(datos)
